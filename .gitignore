@@ -1,0 +1,24 @@
+node_modules/
+dist/
+.parcel-cache/
+.turbo/
+.next/
+.nuxt/
+.svelte-kit/
+.astro/
+
+# build artifacts
+coverage/
+*.log
+*.tsbuildinfo
+
+# env/config
+.env
+.env.*
+
+# editor/OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
