@@ -16,15 +16,18 @@ export function Footer({ onNavigate }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Clinic Info */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
+            <button
+              onClick={() => handleNavigate("home")}
+              className="flex items-center space-x-2 mb-4 hover:opacity-80 transition-opacity"
+            >
               <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white text-xl">BS</span>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col text-left">
                 <span className="text-lg text-white">BrightSmile</span>
                 <span className="text-xs">Denture Clinic</span>
               </div>
-            </div>
+            </button>
             <p className="text-sm mb-4">
               Restoring smiles with comfortable, natural-looking dentures. Your trusted partner in dental prosthetics.
             </p>
@@ -96,8 +99,8 @@ export function Footer({ onNavigate }: FooterProps) {
               <li className="pl-6">Saturday: 9:00 AM - 2:00 PM</li>
               <li className="pl-6">Sunday: Closed</li>
             </ul>
-            <button 
-              onClick={() => handleNavigate("contact")}
+            <button
+              onClick={() => handleNavigate("appointment")}
               className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               Book Appointment

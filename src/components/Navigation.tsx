@@ -7,7 +7,8 @@ type Page =
   | "about" 
   | "services" 
   | "faq" 
-  | "contact" 
+  | "contact"
+  | "appointment"
   | "testimonials"
   | string;
 
@@ -76,8 +77,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               <Phone className="w-4 h-4" />
               <span className="text-sm">+123-456-7890</span>
             </a>
-            <Button 
-              onClick={() => handleNavigate("contact")}
+            <Button
+              onClick={() => handleNavigate("appointment")}
               className="hidden md:inline-flex bg-blue-600 hover:bg-blue-700"
             >
               Book Appointment
@@ -106,8 +107,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   {item.label}
                 </button>
               ))}
-              <Button 
-                onClick={() => handleNavigate("contact")}
+              <Button
+                onClick={() => handleNavigate("appointment")}
                 className="mx-4 bg-blue-600 hover:bg-blue-700"
               >
                 Book Appointment

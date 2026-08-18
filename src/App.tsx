@@ -7,6 +7,7 @@ import { ServicesPage } from "./components/ServicesPage";
 import { ServiceDetailPage } from "./components/ServiceDetailPage";
 import { FAQPage } from "./components/FAQPage";
 import { ContactPage } from "./components/ContactPage";
+import { AppointmentPage } from "./components/AppointmentPage";
 import { TestimonialsPage } from "./components/TestimonialsPage";
 
 type Page =
@@ -15,6 +16,7 @@ type Page =
   | "services"
   | "faq"
   | "contact"
+  | "appointment"
   | "testimonials"
   | "service-complete-dentures"
   | "service-partial-dentures"
@@ -61,7 +63,9 @@ export default function App() {
       case "faq":
         return <FAQPage />;
       case "contact":
-        return <ContactPage />;
+        return <ContactPage onNavigate={setCurrentPage} />;
+      case "appointment":
+        return <AppointmentPage />;
       case "testimonials":
         return <TestimonialsPage />;
       default:

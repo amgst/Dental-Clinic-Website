@@ -242,8 +242,8 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Schedule a free consultation with Dr. Khan to discuss your needs and explore your options.
             </p>
-            <Button 
-              onClick={() => onNavigate("contact")}
+            <Button
+              onClick={() => onNavigate("appointment")}
               size="lg"
               className="bg-white text-blue-600 hover:bg-gray-100"
             >

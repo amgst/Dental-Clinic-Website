@@ -80,8 +80,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   At BrightSmile Denture Clinic, we specialize in creating custom dentures that look natural, feel comfortable, and help you smile with confidence.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    onClick={() => onNavigate("contact")}
+                  <Button
+                    onClick={() => onNavigate("appointment")}
                     size="lg"
                     className="bg-blue-600 hover:bg-blue-700"
                   >
@@ -263,8 +263,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
               Book your free consultation today and take the first step towards a confident, beautiful smile.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => onNavigate("contact")}
+              <Button
+                onClick={() => onNavigate("appointment")}
                 size="lg"
                 className="bg-white text-blue-600 hover:bg-gray-100"
               >

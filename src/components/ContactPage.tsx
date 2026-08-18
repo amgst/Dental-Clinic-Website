@@ -4,28 +4,28 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, CalendarCheck } from "lucide-react";
 import { toast } from "sonner@2.0.3";
-import { ScrollAnimation, StaggerContainer, StaggerItem, FadeIn } from "./animations/ScrollAnimation";
+import { ScrollAnimation, StaggerContainer, StaggerItem } from "./animations/ScrollAnimation";
 
-export function ContactPage() {
+interface ContactPageProps {
+  onNavigate?: (page: string) => void;
+}
+
+export function ContactPage({ onNavigate }: ContactPageProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
-    preferredDate: "",
     message: ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real application, this would send data to a backend
-    toast.success("Appointment request sent! We'll contact you within 24 hours to confirm your appointment.");
+    toast.success("Message sent! We'll get back to you within 24 hours.");
     setFormData({
       name: "",
       email: "",
-      phone: "",
-      preferredDate: "",
       message: ""
     });
   };
@@ -46,7 +46,7 @@ export function ContactPage() {
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl text-blue-900 mb-6">Contact Us</h1>
               <p className="text-xl text-gray-700">
-                Ready to restore your smile? Get in touch to book your free consultation.
+                Have a question? We'd love to hear from you. Reach out any time.
               </p>
             </div>
           </ScrollAnimation>
@@ -64,8 +64,8 @@ export function ContactPage() {
                     <Phone className="w-6 h-6 text-blue-600" />
                   </div>
                   <h3 className="text-lg text-blue-900 mb-2">Phone</h3>
-                  <a 
-                    href="tel:+1234567890" 
+                  <a
+                    href="tel:+1234567890"
                     className="text-gray-700 hover:text-blue-600 transition-colors"
                   >
                     +123-456-7890
@@ -81,8 +81,8 @@ export function ContactPage() {
                     <Mail className="w-6 h-6 text-blue-600" />
                   </div>
                   <h3 className="text-lg text-blue-900 mb-2">Email</h3>
-                  <a 
-                    href="mailto:info@brightsmileclinic.com" 
+                  <a
+                    href="mailto:info@brightsmileclinic.com"
                     className="text-gray-700 hover:text-blue-600 transition-colors break-all"
                   >
                     info@brightsmileclinic.com
@@ -126,17 +126,41 @@ export function ContactPage() {
         </div>
       </section>
 
+      {/* Book an Appointment CTA */}
+      <section className="pb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollAnimation direction="up">
+            <div className="bg-blue-600 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <h2 className="text-2xl text-white mb-2">Ready to book your free consultation?</h2>
+                <p className="text-blue-100">
+                  Head over to our appointment page to schedule a time that works for you.
+                </p>
+              </div>
+              <Button
+                onClick={() => onNavigate?.("appointment")}
+                size="lg"
+                className="bg-white text-blue-600 hover:bg-gray-100 whitespace-nowrap"
+              >
+                <CalendarCheck className="w-4 h-4 mr-2" />
+                Book Appointment
+              </Button>
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
+
       {/* Contact Form & Map */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl text-blue-900 mb-4">Book an Appointment</h2>
+              <h2 className="text-3xl text-blue-900 mb-4">Send Us a Message</h2>
               <p className="text-gray-600 mb-8">
-                Fill out the form below and we'll contact you within 24 hours to confirm your appointment. All consultations are free!
+                Have a general question or need more information? Fill out the form below and we'll get back to you within 24 hours.
               </p>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <Label htmlFor="name">Full Name *</Label>
@@ -167,55 +191,26 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Phone Number *</Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+123-456-7890"
-                    className="mt-2"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="preferredDate">Preferred Appointment Date</Label>
-                  <Input
-                    id="preferredDate"
-                    name="preferredDate"
-                    type="date"
-                    value={formData.preferredDate}
-                    onChange={handleChange}
-                    className="mt-2"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="message">Message / Questions</Label>
+                  <Label htmlFor="message">Message *</Label>
                   <Textarea
                     id="message"
                     name="message"
+                    required
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Tell us about your denture needs or any questions you have..."
+                    placeholder="How can we help you?"
                     className="mt-2 min-h-32"
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full bg-blue-600 hover:bg-blue-700"
                   size="lg"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  Send Appointment Request
+                  Send Message
                 </Button>
-
-                <p className="text-sm text-gray-600 text-center">
-                  By submitting this form, you agree to be contacted by BrightSmile Denture Clinic regarding your appointment.
-                </p>
               </form>
             </div>
 
@@ -226,7 +221,7 @@ export function ContactPage() {
                 <p className="text-gray-600 mb-6">
                   We're conveniently located in the heart of the city with easy access and parking available.
                 </p>
-                
+
                 {/* Map Placeholder */}
                 <div className="aspect-[4/3] bg-gray-200 rounded-lg overflow-hidden border border-gray-300 relative">
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -245,35 +240,15 @@ export function ContactPage() {
                 </div>
               </div>
 
-              {/* Additional Info Cards */}
-              <div className="space-y-4">
-                <Card className="border-green-200 bg-green-50">
-                  <CardContent className="p-6">
-                    <h3 className="text-lg text-green-900 mb-2">Free Consultation</h3>
-                    <p className="text-gray-700 text-sm">
-                      Your first consultation is completely free with no obligation. Come meet Dr. Khan and discuss your options.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-blue-200 bg-blue-50">
-                  <CardContent className="p-6">
-                    <h3 className="text-lg text-blue-900 mb-2">Emergency Services</h3>
-                    <p className="text-gray-700 text-sm">
-                      Need urgent denture repair? Call us for same-day emergency services. We understand denture problems can't always wait.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-purple-200 bg-purple-50">
-                  <CardContent className="p-6">
-                    <h3 className="text-lg text-purple-900 mb-2">Parking & Accessibility</h3>
-                    <p className="text-gray-700 text-sm">
-                      Free parking available on-site. Our clinic is wheelchair accessible with ground-floor access.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+              {/* Additional Info Card */}
+              <Card className="border-purple-200 bg-purple-50">
+                <CardContent className="p-6">
+                  <h3 className="text-lg text-purple-900 mb-2">Parking & Accessibility</h3>
+                  <p className="text-gray-700 text-sm">
+                    Free parking available on-site. Our clinic is wheelchair accessible with ground-floor access.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
